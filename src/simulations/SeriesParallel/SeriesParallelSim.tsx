@@ -541,7 +541,7 @@ export const SeriesParallelSim: React.FC = () => {
           {/* Battery Voltage Slider */}
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-slate-700">Source Voltage ($V$)</span>
+              <span className="text-slate-700">Source Voltage (V)</span>
               <span className="font-mono text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                 {voltage} V
               </span>
@@ -560,7 +560,7 @@ export const SeriesParallelSim: React.FC = () => {
           {/* Resistor 1 */}
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-slate-700">Resistor 1 ($R_1$)</span>
+              <span className="text-slate-700">Resistor 1 (R₁)</span>
               <span className="font-mono text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                 {r1} Ω
               </span>
@@ -579,7 +579,7 @@ export const SeriesParallelSim: React.FC = () => {
           {/* Resistor 2 */}
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-slate-700">Resistor 2 ($R_2$)</span>
+              <span className="text-slate-700">Resistor 2 (R₂)</span>
               <span className="font-mono text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                 {r2} Ω
               </span>
@@ -598,7 +598,7 @@ export const SeriesParallelSim: React.FC = () => {
           {/* Resistor 3 */}
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-slate-700">Resistor 3 ($R_3$)</span>
+              <span className="text-slate-700">Resistor 3 (R₃)</span>
               <span className="font-mono text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                 {r3} Ω
               </span>

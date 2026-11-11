@@ -264,10 +264,10 @@ export const JoulesHeatingSim: React.FC = () => {
       <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
         <div className="flex items-center space-x-2">
           <span className="text-xs uppercase font-extrabold px-3 py-1 rounded-md bg-red-100 text-red-800 tracking-wider">
-            Grade 10–12 Thermodynamics & Electricity
+            Thermal Electricity
           </span>
-          <span className="text-sm font-semibold text-slate-600">
-            Joule's Heating Law ($H = I^2Rt$) & Electrical Power ($P = VI$)
+          <span className="text-sm font-semibold text-slate-700">
+            Joule's Heating Law (H = I² · R · t) & Electrical Power (P = V · I)
           </span>
         </div>
 
@@ -294,19 +294,19 @@ export const JoulesHeatingSim: React.FC = () => {
           {/* Key Metrics Banner */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm text-center">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Heating Power ($P$)</span>
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Heating Power (P)</span>
               <span className="text-xl sm:text-2xl font-mono font-bold text-red-600">{powerWatts.toFixed(1)} W</span>
             </div>
             <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm text-center">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Current ($I$)</span>
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Current (I)</span>
               <span className="text-xl sm:text-2xl font-mono font-bold text-blue-700">{current.toFixed(2)} A</span>
             </div>
             <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm text-center">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Water Temp ($T$)</span>
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Water Temp (T)</span>
               <span className="text-xl sm:text-2xl font-mono font-bold text-amber-600">{currentTemp.toFixed(1)} °C</span>
             </div>
             <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm text-center">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Total Heat ($H$)</span>
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Total Heat (H)</span>
               <span className="text-xl sm:text-2xl font-mono font-bold text-emerald-600">{(powerWatts * elapsedTime).toFixed(0)} J</span>
             </div>
           </div>
@@ -344,7 +344,7 @@ export const JoulesHeatingSim: React.FC = () => {
             <div>
               <p className="font-bold text-slate-800">Physics Principles:</p>
               <p>
-                • <strong>Joule's First Law</strong>: Heat produced in a conductor is proportional to the square of current ($H \propto I^2$), resistance ($H \propto R$), and time ($H \propto t$).
+                • <strong>Joule's Heating Law</strong>: Heat produced in a conductor is proportional to the square of current (H ∝ I²), resistance (H ∝ R), and heating time (H ∝ t).
               </p>
               <p>
                 • <strong>Specific Heat Formula</strong>: The temperature rise ΔT = H / (m · c), where water has a high specific heat capacity of 4.184 J/(g·°C).
@@ -363,7 +363,7 @@ export const JoulesHeatingSim: React.FC = () => {
           {/* Voltage */}
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-slate-700">Heater Voltage ($V$)</span>
+              <span className="text-slate-700">Heater Voltage (V)</span>
               <span className="font-mono text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                 {voltage} V
               </span>
@@ -382,7 +382,7 @@ export const JoulesHeatingSim: React.FC = () => {
           {/* Coil Resistance */}
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-slate-700">Coil Resistance ($R$)</span>
+              <span className="text-slate-700">Coil Resistance (R)</span>
               <span className="font-mono text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                 {resistance} Ω
               </span>
@@ -401,7 +401,7 @@ export const JoulesHeatingSim: React.FC = () => {
           {/* Water Mass */}
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-slate-700">Water Volume ($m$)</span>
+              <span className="text-slate-700">Water Volume (m)</span>
               <span className="font-mono text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                 {waterMass} g (mL)
               </span>

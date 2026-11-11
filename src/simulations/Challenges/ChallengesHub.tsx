@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { TabType } from '../../types/physics';
-import { CheckCircle2, XCircle, ArrowRight, HelpCircle, Award, Sparkles, BookOpen } from 'lucide-react';
+import { CheckCircle2, XCircle, ArrowRight, Trophy } from 'lucide-react';
 
 interface Question {
   id: number;
-  grade: 'Grade 9-10' | 'Grade 11-12';
+  level: 'Fundamental' | 'Advanced';
   topic: string;
   question: string;
   options: string[];
@@ -16,7 +16,7 @@ interface Question {
 const QUESTIONS: Question[] = [
   {
     id: 1,
-    grade: 'Grade 9-10',
+    level: 'Fundamental',
     topic: "Ohm's Law",
     question: "If a circuit operates at a voltage of 6.0 V across a 300 Ω resistor, what is the electric current flowing through it?",
     options: ["2.0 mA", "20.0 mA", "50.0 mA", "1.8 A"],
@@ -26,17 +26,17 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 2,
-    grade: 'Grade 9-10',
+    level: 'Fundamental',
     topic: "Resistance in a Wire",
     question: "A cylindrical copper wire has resistance R. If its length is doubled and its cross-sectional area is halved, its new resistance will be:",
     options: ["R (unchanged)", "2R", "4R", "R / 4"],
     correctIndex: 2,
-    explanation: "R = ρ · L / A. When L becomes 2L and A becomes A/2, R' = ρ · (2L) / (A/2) = 4 · (ρL / A) = 4R.",
+    explanation: "R = (ρ · L) / A. When L becomes 2L and A becomes A/2, R' = ρ · (2L) / (A/2) = 4 · (ρ · L / A) = 4R.",
     simTarget: 'wire-resistance'
   },
   {
     id: 3,
-    grade: 'Grade 9-10',
+    level: 'Fundamental',
     topic: "Series vs Parallel",
     question: "In a domestic household circuit, why are electrical appliances always connected in parallel rather than in series?",
     options: [
@@ -46,12 +46,12 @@ const QUESTIONS: Question[] = [
       "Because parallel circuits require no switches"
     ],
     correctIndex: 1,
-    explanation: "In parallel circuits, every appliance receives the full mains voltage (e.g. 120V/230V) and turning off or removing one device does not break the circuit for others.",
+    explanation: "In parallel circuits, every appliance receives the full mains voltage (e.g. 120V or 230V) and turning off or removing one device does not break the circuit for others.",
     simTarget: 'series-parallel'
   },
   {
     id: 4,
-    grade: 'Grade 11-12',
+    level: 'Advanced',
     topic: "Equivalent Resistance",
     question: "Three resistors of 20 Ω, 30 Ω, and 60 Ω are connected in parallel. What is their effective equivalent resistance?",
     options: ["110 Ω", "10 Ω", "36.6 Ω", "5 Ω"],
@@ -61,7 +61,7 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 5,
-    grade: 'Grade 11-12',
+    level: 'Advanced',
     topic: "Joule's Heating Law",
     question: "An electric heater rated 1000 W operates on a 200 V supply line. What is the electrical resistance of the heater element?",
     options: ["40 Ω", "0.2 Ω", "200 Ω", "5 Ω"],
@@ -71,17 +71,17 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 6,
-    grade: 'Grade 11-12',
+    level: 'Advanced',
     topic: "Electric Circuits & Internal Resistance",
-    question: "When the current drawn from a battery increases, the terminal potential difference across the battery terminals:",
+    question: "When the current drawn from a real battery increases, the terminal potential difference across the battery terminals:",
     options: [
       "Remains constant",
       "Increases linearly",
-      "Decreases because of internal resistance (V = E - Ir)",
+      "Decreases because of internal resistance (V = E - I · r)",
       "Becomes zero immediately"
     ],
     correctIndex: 2,
-    explanation: "Terminal voltage V = E - Ir. As load current I increases, the internal potential drop (Ir) increases, reducing the terminal voltage.",
+    explanation: "Terminal voltage V = E - I · r. As load current I increases, the internal potential drop (I · r) increases, reducing the terminal voltage.",
     simTarget: 'circuit-builder'
   }
 ];
@@ -93,7 +93,7 @@ interface ChallengesHubProps {
 export const ChallengesHub: React.FC<ChallengesHubProps> = ({ onNavigateToSim }) => {
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [submitted, setSubmitted] = useState<{ [key: number]: boolean }>({});
-  const [filterGrade, setFilterGrade] = useState<'all' | 'Grade 9-10' | 'Grade 11-12'>('all');
+  const [filterLevel, setFilterLevel] = useState<'all' | 'Fundamental' | 'Advanced'>('all');
 
   const handleSelect = (questionId: number, optionIdx: number) => {
     if (submitted[questionId]) return;
@@ -107,7 +107,7 @@ export const ChallengesHub: React.FC<ChallengesHubProps> = ({ onNavigateToSim })
   };
 
   const filteredQuestions = QUESTIONS.filter(
-    (q) => filterGrade === 'all' || q.grade === filterGrade
+    (q) => filterLevel === 'all' || q.level === filterLevel
   );
 
   const totalAnswered = Object.keys(submitted).length;
@@ -123,14 +123,14 @@ export const ChallengesHub: React.FC<ChallengesHubProps> = ({ onNavigateToSim })
         <div className="space-y-2 max-w-xl">
           <div className="flex items-center space-x-2">
             <span className="text-xs uppercase font-extrabold px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white tracking-wider">
-              Knowledge Verification
+              Concept Mastery
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Physics Concept Challenges & Quizzes
+            Electricity Practice Challenges & Quizzes
           </h1>
           <p className="text-sm text-blue-100">
-            Apply your insights from the simulations. Solve curriculum-aligned problems for Grades 9 to 12 Electricity & Magnetism.
+            Apply your simulation findings to solve circuit calculations and test your understanding.
           </p>
         </div>
 
@@ -148,15 +148,15 @@ export const ChallengesHub: React.FC<ChallengesHubProps> = ({ onNavigateToSim })
         </div>
       </div>
 
-      {/* Grade Level Filter Buttons */}
+      {/* Filter Buttons */}
       <div className="flex items-center space-x-2">
         <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Filter:</span>
-        {(['all', 'Grade 9-10', 'Grade 11-12'] as const).map((filter) => (
+        {(['all', 'Fundamental', 'Advanced'] as const).map((filter) => (
           <button
             key={filter}
-            onClick={() => setFilterGrade(filter)}
+            onClick={() => setFilterLevel(filter)}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-              filterGrade === filter
+              filterLevel === filter
                 ? 'bg-blue-600 text-white shadow-sm'
                 : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
             }`}
@@ -181,7 +181,7 @@ export const ChallengesHub: React.FC<ChallengesHubProps> = ({ onNavigateToSim })
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center space-x-2">
                   <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
-                    {q.grade}
+                    {q.level}
                   </span>
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                     {q.topic}

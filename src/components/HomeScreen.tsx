@@ -1,138 +1,193 @@
 import React from 'react';
 import { TabType } from '../types/physics';
-import { Zap, GitCommit, Split, Cpu, Flame, Trophy } from 'lucide-react';
+import { 
+  Zap, GitCommit, Cpu, Activity, Split, Flame, Trophy, 
+  ArrowRight, Sparkles, CheckCircle2, Play
+} from 'lucide-react';
 
 interface HomeScreenProps {
   onSelectSim: (tab: TabType) => void;
 }
 
-const simulations: {
+interface SimCardData {
   id: TabType;
   title: string;
-  description: string;
+  badge: string;
+  badgeColor: string;
   formula: string;
+  description: string;
+  features: string[];
   icon: React.ReactNode;
-  accent: string;
-  hoverShadow: string;
-  accentBg: string;
-}[] = [
-  {
-    id: 'ohms-law',
-    title: "Ohm's Law",
-    description: 'Explore the relationship between voltage, current, and resistance.',
-    formula: 'V = I × R',
-    icon: <Zap className="w-7 h-7" />,
-    accent: 'bg-amber-400',
-    hoverShadow: 'hover:shadow-amber-200/60',
-    accentBg: 'bg-amber-50 text-amber-600',
-  },
-  {
-    id: 'wire-resistance',
-    title: 'Wire Resistance',
-    description: 'See how material, length, and area affect resistance.',
-    formula: 'R = ρL/A',
-    icon: <GitCommit className="w-7 h-7" />,
-    accent: 'bg-blue-400',
-    hoverShadow: 'hover:shadow-blue-200/60',
-    accentBg: 'bg-blue-50 text-blue-600',
-  },
-  {
-    id: 'series-parallel',
-    title: 'Series & Parallel',
-    description: 'Compare resistor combinations and their effects on circuits.',
-    formula: 'Resistor Combinations',
-    icon: <Split className="w-7 h-7" />,
-    accent: 'bg-emerald-400',
-    hoverShadow: 'hover:shadow-emerald-200/60',
-    accentBg: 'bg-emerald-50 text-emerald-600',
-  },
-  {
-    id: 'circuit-builder',
-    title: 'DC Circuit Lab',
-    description: 'Build your own circuits and measure voltage, current, and more.',
-    formula: 'Build & Measure Circuits',
-    icon: <Cpu className="w-7 h-7" />,
-    accent: 'bg-purple-400',
-    hoverShadow: 'hover:shadow-purple-200/60',
-    accentBg: 'bg-purple-50 text-purple-600',
-  },
-  {
-    id: 'joules-law',
-    title: "Joule's Heating",
-    description: 'Discover how current generates heat in conductors.',
-    formula: 'H = I²Rt',
-    icon: <Flame className="w-7 h-7" />,
-    accent: 'bg-red-400',
-    hoverShadow: 'hover:shadow-red-200/60',
-    accentBg: 'bg-red-50 text-red-600',
-  },
-  {
-    id: 'challenges',
-    title: 'Concept Challenges',
-    description: 'Test your understanding with interactive quizzes and problems.',
-    formula: 'Test Your Knowledge',
-    icon: <Trophy className="w-7 h-7" />,
-    accent: 'bg-yellow-400',
-    hoverShadow: 'hover:shadow-yellow-200/60',
-    accentBg: 'bg-yellow-50 text-yellow-600',
-  },
-];
+  gradient: string;
+}
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ onSelectSim }) => {
+  const simulations: SimCardData[] = [
+    {
+      id: 'ohms-law',
+      title: "Ohm's Law",
+      badge: 'Core Law',
+      badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
+      formula: 'V = I · R',
+      description: 'See how voltage, current, and resistance interact with giant letters that scale dynamically in real time.',
+      features: ['Dynamic letter scaling', 'Real-time battery stacking', 'Microscopic scattering dots', 'Current direction arrows'],
+      icon: <Zap className="w-6 h-6 text-amber-500" />,
+      gradient: 'from-blue-600 to-indigo-700'
+    },
+    {
+      id: 'wire-resistance',
+      title: 'Resistance in a Wire',
+      badge: 'Conductor Physics',
+      badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+      formula: 'R = (ρ · L) / A',
+      description: 'Stretch the wire length, change cross-sectional thickness, and test real materials like Copper, Aluminum, and Nichrome.',
+      features: ['3D conductor stretching', 'Material resistivity presets', 'Impurity collision density', 'Electron drift arrow'],
+      icon: <GitCommit className="w-6 h-6 text-emerald-500" />,
+      gradient: 'from-emerald-600 to-teal-700'
+    },
+    {
+      id: 'circuit-builder',
+      title: 'Circuit Construction Kit: DC',
+      badge: 'DC Workbench',
+      badgeColor: 'bg-orange-100 text-orange-800 border-orange-200',
+      formula: 'I = V / R',
+      description: 'Build complete DC circuits with batteries, light bulbs, resistors, and knife switches. Measure with realistic multimeter probes.',
+      features: ['Drag & drop components', 'Dual-lead Voltmeter & Ammeter', 'Electrons vs Conventional flow', 'Realistic & schematic views'],
+      icon: <Cpu className="w-6 h-6 text-orange-500" />,
+      gradient: 'from-orange-500 to-amber-600'
+    },
+    {
+      id: 'circuit-builder-ac',
+      title: 'Circuit Construction Kit: AC',
+      badge: 'AC Electronics',
+      badgeColor: 'bg-sky-100 text-sky-800 border-sky-200',
+      formula: 'v(t) = V₀ · sin(2πft)',
+      description: 'Explore alternating current circuits with AC voltage generators, capacitors, frequency controls, and a live oscilloscope waveform chart.',
+      features: ['AC sine wave generator', 'Variable frequency slider', 'Live oscilloscope chart', 'Capacitive response'],
+      icon: <Activity className="w-6 h-6 text-sky-500" />,
+      gradient: 'from-sky-600 to-blue-700'
+    },
+    {
+      id: 'series-parallel',
+      title: 'Series & Parallel Circuits',
+      badge: 'Circuit Analysis',
+      badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+      formula: 'Req = R₁ + R₂  |  1/Req = 1/R₁ + 1/R₂',
+      description: 'Compare series loops and parallel branches. Test glowing incandescent bulbs and flip branch switches to see why homes use parallel wiring.',
+      features: ['Interactive light bulb glowing', 'Branch disconnect switches', 'Equivalent resistance solver', 'Power distribution analysis'],
+      icon: <Split className="w-6 h-6 text-purple-500" />,
+      gradient: 'from-purple-600 to-indigo-700'
+    },
+    {
+      id: 'joules-law',
+      title: "Joule's Heating & Power",
+      badge: 'Thermal Energy',
+      badgeColor: 'bg-red-100 text-red-800 border-red-200',
+      formula: 'H = I² · R · t  &  P = V · I',
+      description: 'Power an immersion heating coil in a water calorimeter. Track heating power, boiling point, and live temperature curves over time.',
+      features: ['Water calorimeter model', 'Real-time Temperature vs Time graph', 'Boiling bubbles animation', 'Power calculation gauge'],
+      icon: <Flame className="w-6 h-6 text-red-500" />,
+      gradient: 'from-red-600 to-rose-700'
+    },
+    {
+      id: 'challenges',
+      title: 'Electricity Challenges & Quiz',
+      badge: 'Interactive Practice',
+      badgeColor: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+      formula: 'Concept Mastery',
+      description: 'Test your physics knowledge with interactive circuit challenges, numerical calculations, and instant conceptual feedback.',
+      features: ['Curriculum-aligned questions', 'Instant answer verification', 'Step-by-step explanations', 'Live score tracking'],
+      icon: <Trophy className="w-6 h-6 text-yellow-500" />,
+      gradient: 'from-amber-600 to-yellow-600'
+    }
+  ];
+
   return (
-    <div className="bg-[#fbfbf2] min-h-[80vh]">
-      {/* Hero Section */}
-      <section className="text-center pt-16 pb-12 px-4">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-tr from-blue-700 to-indigo-500 shadow-xl shadow-blue-500/25 mb-6">
-          <Zap className="w-10 h-10 text-white fill-current" />
+    <div className="min-h-[calc(100vh-4rem)] p-4 sm:p-6 md:p-8 max-w-7xl mx-auto space-y-8">
+      
+      {/* Hero Header Banner */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-2xl">
+        <div className="relative z-10 max-w-2xl space-y-3">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold tracking-wide">
+            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+            <span>Interactive Electricity Physics Suite</span>
+          </div>
+
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+            Circuit<span className="text-blue-400">Lab</span>
+          </h1>
+
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+            Select an interactive laboratory simulation below to explore electric circuits, Ohm's law, wire resistance, AC waveforms, and electrical heating with real-time instruments.
+          </p>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
-          Circuit<span className="text-blue-600">Lab</span>
-        </h1>
-        <p className="mt-3 text-lg sm:text-xl text-slate-500 font-medium max-w-md mx-auto">
-          Interactive Electricity Simulations
-        </p>
-      </section>
 
-      {/* Simulation Cards Grid */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {simulations.map((sim) => (
-            <button
-              key={sim.id}
-              onClick={() => onSelectSim(sim.id)}
-              className={`group relative bg-white rounded-2xl overflow-hidden text-left transition-all duration-200 shadow-sm hover:shadow-xl ${sim.hoverShadow} border border-slate-100 hover:border-slate-200 cursor-pointer`}
-            >
-              {/* Accent strip */}
-              <div className={`h-1.5 ${sim.accent}`} />
+        {/* Decorative background glow */}
+        <div className="absolute -right-12 -bottom-12 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      </div>
 
-              <div className="p-5">
-                {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${sim.accentBg} mb-4`}>
+      {/* Grid of Simulation Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {simulations.map((sim) => (
+          <div
+            key={sim.id}
+            onClick={() => onSelectSim(sim.id)}
+            className="group cursor-pointer bg-white rounded-2xl border-2 border-slate-200/80 hover:border-blue-500 shadow-sm hover:shadow-xl transition-all duration-200 p-6 flex flex-col justify-between space-y-4 hover:-translate-y-1"
+          >
+            {/* Card Header */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
                   {sim.icon}
                 </div>
+                <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${sim.badgeColor}`}>
+                  {sim.badge}
+                </span>
+              </div>
 
-                {/* Title */}
-                <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                   {sim.title}
                 </h3>
-
-                {/* Formula tag */}
-                <span className="inline-block mt-1 text-xs font-mono font-semibold text-slate-400">
+                {/* Clean Math Formula (No raw code) */}
+                <div className="inline-block mt-1 font-mono text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
                   {sim.formula}
-                </span>
-
-                {/* Description */}
-                <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-                  {sim.description}
-                </p>
+                </div>
               </div>
-            </button>
-          ))}
-        </div>
-      </section>
+
+              <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed">
+                {sim.description}
+              </p>
+
+              {/* Feature bullet tags */}
+              <div className="space-y-1 pt-1">
+                {sim.features.map((feat, idx) => (
+                  <div key={idx} className="flex items-center space-x-1.5 text-[11px] text-slate-500 font-medium">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                    <span>{feat}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Launch Button */}
+            <div className="pt-2 border-t border-slate-100">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSelectSim(sim.id);
+                }}
+                className="w-full py-2.5 px-4 bg-slate-100 group-hover:bg-blue-600 text-slate-800 group-hover:text-white rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 shadow-sm"
+              >
+                <Play className="w-4 h-4 fill-current" />
+                <span>Launch Simulation</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 };
-
-export default HomeScreen;
